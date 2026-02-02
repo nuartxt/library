@@ -1,10 +1,8 @@
-
-let mainBody = document.querySelector("main");
-let btn_plus = document.querySelector(".btn_plus");
-let confirm = document.querySelector("#confirm");
-let registerBook = document.querySelector(".register");
-let form = document.querySelector("form");
-
+const mainBody = document.querySelector("main");
+const btn_plus = document.querySelector(".btn_plus");
+const confirm = document.querySelector("#confirm");
+const registerBook = document.querySelector(".register");
+const form = document.querySelector("form");
 
 btn_plus.addEventListener("click", () => {
     registerBook.classList.toggle("hidden");
@@ -13,25 +11,25 @@ btn_plus.addEventListener("click", () => {
 const myLibrary = [];
 
 
-
-
+//our ONE BOOK OBJECT wich we push in array myLibrary
 function Book(title, author, number, read) {
     this.id = crypto.randomUUID();
     this.title = title;
     this.author = author;
     this.number = number;
     this.read = read;
-
 }
 
+//this function push our book obj in array myLibrary
 function addBookToLibrary(title, author, number, read) {
     const book = new Book(title, author, number, read);
     myLibrary.push(book);
 }
 
+
+//this part help us create titile, author and etc 
 form.addEventListener("submit", (event) => {
     event.preventDefault();
-
 
     const formData = new FormData(form);
 
@@ -42,10 +40,17 @@ form.addEventListener("submit", (event) => {
 
     addBookToLibrary(title, author, number, read);
     console.log(myLibrary);
-
+    clearForm(input);
 })
 
 
+const input = document.querySelectorAll("input");
+function clearForm(arr) {
+    arr.forEach(el => {
+        el.value = "";
+    })
+    form.classList.toggle("hidden");
+}
 
 
 
@@ -65,9 +70,8 @@ form.addEventListener("submit", (event) => {
 
 
 
-// btn_plus.addEventListener("click", () => {
-//     console.log(title)
-// })
+
+
 
 
 
