@@ -25,9 +25,8 @@ function Book(title, author, bookPages, read, id) {
 function adBookToLibrary(title, author, bookPages, read, id) {
     const book = new Book(title, author, bookPages, read, id);
     library.push(book);
-    return book;
+    // return book;
 }
-
 
 
 //this part help us create titile, author and etc 
@@ -41,6 +40,18 @@ registerBook.addEventListener("submit", (event) => {
     const bookPages = bookData.get("numberBook");
     const read = bookData.get("readBook");
     const id = crypto.randomUUID();
+
+    // for (const el of input) {
+    //     if (!el.value == "") {
+    //         adBookToLibrary(title, author, bookPages, read, id);
+    //         console.log(library);
+    //         clearBookRegiater();
+    //         showBooksOnDisplay(body, title, author, bookPages, read, id);
+    //     } else {
+    //         alert("fuck you");
+    //         break;
+    //     }
+    // }
 
     adBookToLibrary(title, author, bookPages, read, id);
     console.log(library);
@@ -81,18 +92,19 @@ function showBooksOnDisplay(body, title, author, bookPages, read, id) {
     cardNumber.textContent = `${bookPages} pages`;
 
 
-
-
     // //cardbtns
+    let btnDiv = document.createElement("div");
+    btnDiv.classList.add("btnDiv");
+    card.appendChild(btnDiv);
+
     let removeBtn = document.createElement("button");
     removeBtn.classList.add("remove", "cardBtn");
     removeBtn.textContent = "remove";
-    card.appendChild(removeBtn);
+    btnDiv.appendChild(removeBtn);
 
     let readBtn = document.createElement("button");
     readBtn.classList.add("read", "cardBtn");
     readBtn.textContent = "read";
-    card.appendChild(readBtn);
-
+    btnDiv.appendChild(readBtn);
 
 }

@@ -64,6 +64,10 @@ main {
     color: yellow;
 }
 
+.btnDiv{
+    display: flex;
+    justify-content: space-between;
+}
 
 
 .register {
