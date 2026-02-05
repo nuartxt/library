@@ -60,11 +60,19 @@ main {
     height: 50px;
     border: 2px solid yellow;
     border-radius: 10px;
-    background-color: rgb(8, 8, 141);
-    color: yellow;
+    color: black;
+    background-color: blue;
 }
 
-.btnDiv{
+.readBtn {
+    background-color: red;
+}
+
+.greenBtn {
+    background-color: green;
+}
+
+.btnDiv {
     display: flex;
     justify-content: space-between;
 }
