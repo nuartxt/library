@@ -8,7 +8,7 @@ btnPlus.addEventListener("click", () => {
 })
 
 
-const library = [];
+let library = [];
 
 
 //our ONE BOOK OBJECT wich we push in array myLibrary
@@ -45,7 +45,6 @@ registerBook.addEventListener("submit", (event) => {
     console.log(library);
     clearBookRegiater();
     showBooksOnDisplay(body, title, author, bookPages, read, id);
-    // console.log(read);
 })
 
 
@@ -86,23 +85,27 @@ function showBooksOnDisplay(body, title, author, bookPages, read, id) {
     btnDiv.classList.add("btnDiv");
     card.appendChild(btnDiv);
 
+
+    //removeBtn
     let removeBtn = document.createElement("button");
     removeBtn.classList.add("remove", "cardBtn");
     removeBtn.textContent = "remove";
     btnDiv.appendChild(removeBtn);
 
+    removeBtn.addEventListener("click", () => {
+        for (let i = 0; i < library.length; i++) {
+            if (card.id === library[i].id) {
+                library.splice(i, 1);
+                card.remove();
+                console.log(library);
+                break;
+            }
+        }
+    })
+
+    //readBtn
     let readBtn = document.createElement("button");
     readBtn.classList.add("cardBtn");
-
-    readBtn.textContent = "haven't read";
-    if (read == true) {
-        readBtn.classList.toggle("greenBtn");
-        readBtn.textContent = "read";
-    } else {
-        readBtn.textContent = "haven't read";
-        readBtn.classList.toggle("readBtn");
-    }
-    btnDiv.appendChild(readBtn);
 
     readBtn.addEventListener("click", () => {
         if (read == true) {
@@ -111,5 +114,14 @@ function showBooksOnDisplay(body, title, author, bookPages, read, id) {
             read = true;
         }
     })
+
+    if (read == true) {
+        readBtn.classList.toggle("greenBtn");
+        readBtn.textContent = "read";
+    } else {
+        readBtn.textContent = "haven't read";
+        readBtn.classList.toggle("readBtn");
+    }
+    btnDiv.appendChild(readBtn);
 
 }
