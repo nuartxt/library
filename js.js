@@ -2,10 +2,21 @@ const registerBook = document.querySelector(".register");
 const btnPlus = document.querySelector(".btn_plus");
 const input = document.querySelectorAll("input");
 const body = document.querySelector("main");
+const closeBtn = document.querySelector("#close");
 
-btnPlus.addEventListener("click", () => {
-    registerBook.classList.toggle("hidden");
-})
+
+
+function RegisterDisplay(closeBtn, btnPlus) {
+    btnPlus.addEventListener("click", () => {
+        registerBook.classList.toggle("hidden");
+    })
+    closeBtn.addEventListener("click", () => {
+        registerBook.classList.toggle("hidden");
+
+    })
+}
+RegisterDisplay(closeBtn, btnPlus);
+
 
 
 let library = [];
@@ -58,6 +69,7 @@ function clearBookRegiater() {
 
 
 
+
 // this function show our books on display
 function showBooksOnDisplay(body, title, author, bookPages, read, id) {
 
@@ -90,6 +102,7 @@ function showBooksOnDisplay(body, title, author, bookPages, read, id) {
     let removeBtn = document.createElement("button");
     removeBtn.classList.add("remove", "cardBtn");
     removeBtn.textContent = "remove";
+
     btnDiv.appendChild(removeBtn);
 
     removeBtn.addEventListener("click", () => {
@@ -106,14 +119,7 @@ function showBooksOnDisplay(body, title, author, bookPages, read, id) {
     //readBtn
     let readBtn = document.createElement("button");
     readBtn.classList.add("cardBtn");
-
-    readBtn.addEventListener("click", () => {
-        if (read == true) {
-            read = false;
-        } else {
-            read = true;
-        }
-    })
+    readBtn.type = "button";
 
     if (read == true) {
         readBtn.classList.toggle("greenBtn");
@@ -122,6 +128,21 @@ function showBooksOnDisplay(body, title, author, bookPages, read, id) {
         readBtn.textContent = "haven't read";
         readBtn.classList.toggle("readBtn");
     }
+
+
+    readBtn.addEventListener("click", () => {
+        if (read = true) {
+            read = false;
+        } else {
+            read = true;
+        }
+        console.log("click");
+    })
+
+
     btnDiv.appendChild(readBtn);
 
+
 }
+
+
