@@ -31,12 +31,18 @@ function Book(title, author, bookPages, read, id) {
     this.read = read;
 }
 
+Book.prototype.toggleRead = function () {
+    this.read = !this.read
+    console.log(library);
+    console.log(this.read);
+}
+
 
 //this function push our books obj in array myLibrary
 function adBookToLibrary(title, author, bookPages, read, id) {
     const book = new Book(title, author, bookPages, read, id);
     library.push(book);
-    // return book;
+    return book;
 }
 
 
@@ -52,10 +58,10 @@ registerBook.addEventListener("submit", (event) => {
     const read = bookData.get("readBook") !== null;
     const id = crypto.randomUUID();
 
-    adBookToLibrary(title, author, bookPages, read, id);
+    const book = adBookToLibrary(title, author, bookPages, read, id);
     console.log(library);
     clearBookRegiater();
-    showBooksOnDisplay(body, title, author, bookPages, read, id);
+    showBooksOnDisplay(body, book);
 })
 
 
@@ -71,7 +77,7 @@ function clearBookRegiater() {
 
 
 // this function show our books on display
-function showBooksOnDisplay(body, title, author, bookPages, read, id) {
+function showBooksOnDisplay(body, book) {
 
     //Card info
     let card = document.createElement("div");
@@ -86,10 +92,10 @@ function showBooksOnDisplay(body, title, author, bookPages, read, id) {
     card.appendChild(cardAuthor);
     card.appendChild(cardNumber);
 
-    card.id = id;
-    cardTitle.textContent = title;
-    cardAuthor.textContent = author;
-    cardNumber.textContent = `${bookPages} pages`;
+    card.id = book.id;
+    cardTitle.textContent = book.title;
+    cardAuthor.textContent = book.author;
+    cardNumber.textContent = `${book.bookPages} pages`;
 
 
     // //cardbtns
@@ -121,25 +127,26 @@ function showBooksOnDisplay(body, title, author, bookPages, read, id) {
     readBtn.classList.add("cardBtn");
     readBtn.type = "button";
 
-    if (read == true) {
-        readBtn.classList.toggle("greenBtn");
-        readBtn.textContent = "read";
-    } else {
-        readBtn.textContent = "haven't read";
-        readBtn.classList.toggle("readBtn");
+
+    function updateStatus(readBtn, book) {
+        if (book.read) {
+            readBtn.classList.toggle("greenBtn");
+            readBtn.textContent = "read";
+        } else {
+            readBtn.textContent = "haven't read";
+            readBtn.classList.toggle("readBtn");
+        }
     }
 
+    updateStatus(readBtn, book);
 
-    readBtn.addEventListener("click", () => {
-        if (read = true) {
-            read = false;
-        } else {
-            read = true;
-        }
-        console.log("click");
-    })
-
-
+    function changeStatus(readBtn, book) {
+        readBtn.addEventListener("click", () => {
+            book.toggleRead();
+            updateStatus(readBtn, book)
+        })
+    }
+    changeStatus(readBtn, book);
     btnDiv.appendChild(readBtn);
 
 
