@@ -130,11 +130,13 @@ function showBooksOnDisplay(body, book) {
 
     function updateStatus(readBtn, book) {
         if (book.read) {
-            readBtn.classList.toggle("greenBtn");
+            readBtn.classList.add("greenBtn");
+            readBtn.classList.remove("readBtn");
             readBtn.textContent = "read";
         } else {
             readBtn.textContent = "haven't read";
-            readBtn.classList.toggle("readBtn");
+            readBtn.classList.add("readBtn");
+            readBtn.classList.remove("greenBtn");
         }
     }
 
